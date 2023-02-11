@@ -85,11 +85,11 @@ fun exercise12(list: MutableList<Int>): List<Int> {
     return result
 }
 
-open class NhanVien constructor(id: Int, name: String, dob: String, address: String) {
-    var id: Int = id
-    var name: String = name
-    var dob: String = dob
-    var address: String = address
+open class NhanVien constructor(_id: Int, _name: String, _dob: String, _address: String) {
+    var id: Int = _id
+    var name: String = _name
+    var dob: String = _dob
+    var address: String = _address
 
     fun NhapThongTin() {
         println("Nhập ID: ")
@@ -103,20 +103,43 @@ open class NhanVien constructor(id: Int, name: String, dob: String, address: Str
     }
 
     open fun XuatThongTin() {
-        println("ID: $id")
-        println("Tên: $name")
-        println("Ngày sinh: $dob")
-        println("Địa chỉ: $address")
+        val idToPrint = if (id != null) id else "no id"
+        val nameToPrint = if (name != null) name else "no name"
+        val dobToPrint = if (dob != null) dob else "no dob"
+        val addressToPrint = if (address != null) address else "no address"
+
+        println("ID: $idToPrint")
+        println("Tên: $nameToPrint")
+        println("Ngày sinh: $dobToPrint")
+        println("Địa chỉ: $addressToPrint")
     }
 }
 
-class NhanVienSanXuat constructor(id: Int, name: String, dob: String, address: String, quantity: Int) :
-        NhanVien(id, name, dob, address) {
-    var quantity: Int = quantity
+class NhanVienSanXuat constructor(_id: Int, _name: String, _dob: String, _address: String, _quantity: Int) :
+        NhanVien(_id, _name, _dob, _address) {
+    var quantity: Int = _quantity
+
+    fun TinhLuong(): Int {
+        return quantity * 20000
+    }
 
     override fun XuatThongTin() {
         super.XuatThongTin()
-        println("Lương: $salary")
+        println("Lương: ${TinhLuong()}")
+    }
+}
+
+class NhanVienCongNhat constructor(_id: Int, _name: String, _dob: String, _address: String, _day: Int) :
+        NhanVien(_id, _name, _dob, _address) {
+    var day: Int = _day
+
+    fun TinhLuong(): Int {
+        return day * 300000
+    }
+
+    override fun XuatThongTin() {
+        super.XuatThongTin()
+        println("Lương: ${TinhLuong()}")
     }
 }
 
