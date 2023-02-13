@@ -89,12 +89,19 @@ open class DocGia(_maDocGia: Int, _hoTen: String) {
     var maDocGia: Int = _maDocGia
     var hoTen: String = _hoTen
 
-    open fun NhapThongTin() {
-        print("Nhập mã độc giả: ")
-        maDocGia = readLine()!!.toInt()
-        print("Nhập họ tên: ")
-        hoTen = readLine()!!
+    open fun nhapThongTin() {
+        try {
+            print("Nhập mã độc giả: ")
+            maDocGia = readLine()!!.toInt()
+            print("Nhập họ tên: ")
+            hoTen = readLine()!!
+        } catch (e: NumberFormatException) {
+            println("Mã độc giả phải là số nguyên")
+            nhapThongTin()
+        }
     }
+
+    open fun lePhi() {}
 
     open fun xuatThongTin() {
         println("Ma doc gia: $maDocGia")
@@ -102,18 +109,33 @@ open class DocGia(_maDocGia: Int, _hoTen: String) {
     }
 }
 
-class DocGiaThuong(_maDocGia: Int, _hoTen: String, _ngayHetHan: String, _gioiTinh: String, _soSachMuon: Int) : DocGia(_maDocGia, _hoTen) {
+class DocGiaThuong(
+        _maDocGia: Int,
+        _hoTen: String,
+        _ngayHetHan: String,
+        _gioiTinh: String,
+        _soSachMuon: Int
+) : DocGia(_maDocGia, _hoTen) {
     var ngayHetHan: String = _ngayHetHan
     var gioiTinh: String = _gioiTinh
     var soSachMuon: Int = _soSachMuon
 
     constructor() : this(0, "", "", "", 0)
     constructor(_maDocGia: Int, _hoTen: String) : this(_maDocGia, _hoTen, "", "", 0)
-    constructor(_maDocGia: Int, _hoTen: String, _ngayHetHan: String, _gioiTinh: String) : this(_maDocGia, _hoTen, _ngayHetHan, _gioiTinh, 0)
-    constructor(_maDocGia: Int, _hoTen: String, _soSachMuon: Int) : this(_maDocGia, _hoTen, "", "", _soSachMuon)
+    constructor(
+            _maDocGia: Int,
+            _hoTen: String,
+            _ngayHetHan: String,
+            _gioiTinh: String
+    ) : this(_maDocGia, _hoTen, _ngayHetHan, _gioiTinh, 0)
+    constructor(
+            _maDocGia: Int,
+            _hoTen: String,
+            _soSachMuon: Int
+    ) : this(_maDocGia, _hoTen, "", "", _soSachMuon)
 
-    fun nhapThongTin() {
-        super.NhapThongTin()
+    override fun nhapThongTin() {
+        super.nhapThongTin()
         print("Nhập ngày hết hạn: ")
         ngayHetHan = readLine()!!
         print("Nhập giới tính: ")
@@ -122,7 +144,7 @@ class DocGiaThuong(_maDocGia: Int, _hoTen: String, _ngayHetHan: String, _gioiTin
         soSachMuon = readLine()!!.toInt()
     }
 
-    fun lePhi() {
+    override fun lePhi() {
         println("Lệ phí: ${soSachMuon * 5000}")
     }
 
@@ -134,23 +156,28 @@ class DocGiaThuong(_maDocGia: Int, _hoTen: String, _ngayHetHan: String, _gioiTin
     }
 }
 
-class DocGiaVip(_maDocGia: Int, _hoTen: String, _ngayHetHan: String, _gioiTinh: String) : DocGia(_maDocGia, _hoTen) {
+class DocGiaVip(_maDocGia: Int, _hoTen: String, _ngayHetHan: String, _gioiTinh: String) :
+        DocGia(_maDocGia, _hoTen) {
     var ngayHetHan: String = _ngayHetHan
     var gioiTinh: String = _gioiTinh
 
     constructor() : this(0, "", "", "")
     constructor(_maDocGia: Int, _hoTen: String) : this(_maDocGia, _hoTen, "", "")
-    constructor(_maDocGia: Int, _hoTen: String, _gioiTinh: String) : this(_maDocGia, _hoTen, "", _gioiTinh)
+    constructor(
+            _maDocGia: Int,
+            _hoTen: String,
+            _gioiTinh: String
+    ) : this(_maDocGia, _hoTen, "", _gioiTinh)
 
-    fun nhapThongTin() {
-        super.NhapThongTin()
+    override fun nhapThongTin() {
+        super.nhapThongTin()
         print("Nhập ngày hết hạn: ")
         ngayHetHan = readLine()!!
         print("Nhập giới tính: ")
         gioiTinh = readLine()!!
     }
 
-    fun lePhi() {
+    override fun lePhi() {
         println("Lệ phí: 50000")
     }
 
@@ -195,7 +222,4 @@ fun main() {
     docgia4.nhapThongTin()
     docgia4.xuatThongTin()
     docgia4.lePhi()
-    
-
-
 }
