@@ -85,6 +85,60 @@ fun exercise12(list: MutableList<Int>): List<Int> {
     return result
 }
 
+fun calculateTaxiFare(length: Double): Double {
+    if (length <= 1) return 15000.0
+    else if (length <= 5) return 15000 + (length - 1) * 13500
+    else if (length <= 120)  return 15000 + 4 * 13500 + (length - 5) * 11000
+    else return 15000 + 4 * 13500 + (length - 5) * 11000 * 0.9
+}
+
+fun calculateDeliveryFare(price: Double, quantity: Int, isDelivery: Boolean): Double {
+    var result = price * quantity
+    if (isDelivery) {
+        if (result > 100000.0) {
+            result += 20000.0
+            result *= 0.9 // 10% discount
+        } else result += 20000.0
+    }
+    return result
+}
+
+fun currencyConverter() {
+    var amount: Double
+    var result: Double
+    var choice: Int
+    try {
+        print("Nhập lựa chọn (1: USD -> VND, 2: VND -> USD): ")
+        choice = readLine()!!.toInt()
+        print("Nhập số tiền: ")
+        amount = readLine()!!.toDouble()
+        if (choice == 1) {
+            result = amount * 22700
+            println("$amount USD = $result VND")
+        } else if (choice == 2) {
+            result = amount / 22700
+            println("$amount VND = $result USD")
+        } else {
+            println("Lựa chọn không hợp lệ")
+            currencyConverter()
+        }
+    } 
+    catch (e: NumberFormatException) { 
+        println("Số tiền phải là số thực")
+        currencyConverter()
+    }
+}
+
+fun exercise4(n: Int): Int {
+    var s = 0
+    var i = 1
+    while (s <= n) {
+        s += i
+        i++
+    }
+    return i - 1
+}
+
 open class DocGia(_maDocGia: Int, _hoTen: String) {
     var maDocGia: Int = _maDocGia
     var hoTen: String = _hoTen
@@ -191,6 +245,15 @@ class DocGiaVip(_maDocGia: Int, _hoTen: String, _ngayHetHan: String, _gioiTinh: 
 fun main() {
     var list1: MutableList<Int> = mutableListOf(3, 5, 1, 2, 4)
     var list2: MutableList<Int> = mutableListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+    var length = 150.2
+    var price = 100000.0
+    var quantity = 5
+    var isDelivery = true
+
+    println(calculateTaxiFare(length))
+    println(calculateDeliveryFare(price, quantity, isDelivery))
+    currencyConverter()
+    print(exercise4(6))
 
     println("Exercise 7: " + exercise7(list1))
 
