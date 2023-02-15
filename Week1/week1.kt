@@ -139,6 +139,88 @@ fun exercise4(n: Int): Int {
     return i - 1
 }
 
+open class NhanVien constructor(_id: Int, _name: String, _dob: String, _address: String) {
+    var id: Int = _id
+    var name: String = _name
+    var dob: String = _dob
+    var address: String = _address
+
+    open fun NhapThongTin() {
+        println("Nhập ID: ")
+        id = readLine()!!.toInt()
+        println("Nhập tên: ")
+        name = readLine()!!.toString()
+        println("Nhập ngày sinh: ")
+        dob = readLine()!!.toString()
+        println("Nhập địa chỉ: ")
+        address = readLine()!!.toString()
+    }
+
+    open fun XuatThongTin() {
+        val idToPrint = if (id != null) id else "no id"
+        val nameToPrint = if (name != null) name else "no name"
+        val dobToPrint = if (dob != null) dob else "no dob"
+        val addressToPrint = if (address != null) address else "no address"
+
+        println("ID: $idToPrint")
+        println("Tên: $nameToPrint")
+        println("Ngày sinh: $dobToPrint")
+        println("Địa chỉ: $addressToPrint")
+    }
+}
+
+class NhanVienSanXuat constructor(_id: Int, _name: String, _dob: String, _address: String, _quantity: Int) :
+        NhanVien(_id, _name, _dob, _address) {
+    var quantity: Int = _quantity
+
+    constructor(): this(0, "", "", "", 0)
+    constructor(_id: Int, _name: String, _dob: String, _address: String) : this(_id, _name, _dob, _address, 0)
+    constructor(_id: Int, _name: String) : this(_id, _name, "", "", 0)
+    constructor(_id: Int) : this(_id, "", "", "", 0)
+    constructor(_name: String) : this(0, _name, "", "", 0)
+
+    override fun NhapThongTin() {
+        super.NhapThongTin()
+        println("Nhập số lượng sản phẩm: ")
+        quantity = readLine()!!.toInt()
+    }
+
+    fun TinhLuong(): Int {
+        return quantity * 20000
+    }
+
+    override fun XuatThongTin() {
+        super.XuatThongTin()
+        println("Lương: ${TinhLuong()}")
+    }
+}
+
+class NhanVienCongNhat constructor(_id: Int, _name: String, _dob: String, _address: String, _day: Int) :
+        NhanVien(_id, _name, _dob, _address) {
+    var day: Int = _day
+
+    constructor(): this(0, "", "", "", 0)
+    constructor(_id: Int, _name: String, _dob: String, _address: String) : this(_id, _name, _dob, _address, 0)
+    constructor(_id: Int, _name: String) : this(_id, _name, "", "", 0)
+    constructor(_id: Int) : this(_id, "", "", "", 0)
+    constructor(_name: String) : this(0, _name, "", "", 0)
+
+    override fun NhapThongTin() {
+        super.NhapThongTin()
+        println("Nhập số ngày làm việc: ")
+        day = readLine()!!.toInt()
+    }
+
+    fun TinhLuong(): Int {
+        return day * 300000
+    }
+
+    override fun XuatThongTin() {
+        super.XuatThongTin()
+        println("Lương: ${TinhLuong()}")
+    }
+}
+
 open class DocGia(_maDocGia: Int, _hoTen: String) {
     var maDocGia: Int = _maDocGia
     var hoTen: String = _hoTen
@@ -269,6 +351,22 @@ fun main() {
     println("Exercise 11: " + exercise11(6))
 
     println("Exercise 12: " + exercise12(list2))
+
+    var nv1: NhanVienSanXuat = NhanVienSanXuat(1, "Nguyen Van A", "01/01/2000", "Ha Noi", 100)
+    var nv2: NhanVienCongNhat = NhanVienCongNhat(2, "Nguyen Van B", "02/02/2000", "Ha Noi", 100)
+    var nv3 = NhanVienSanXuat()
+    var nv4 = NhanVienCongNhat()
+
+    nv1.XuatThongTin()
+    nv1.TinhLuong()
+    nv2.XuatThongTin()
+    nv2.TinhLuong()
+    nv3.NhapThongTin()
+    nv3.XuatThongTin()
+    nv3.TinhLuong()
+    nv4.NhapThongTin()
+    nv4.XuatThongTin()
+    nv4.TinhLuong()
 
     var docgia1: DocGiaThuong = DocGiaThuong(1, "Nguyen Van A", "01/01/2021", "Nam", 3)
     var docgia2: DocGiaVip = DocGiaVip(2, "Nguyen Van B", "01/01/2021", "Nam")
