@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Homework Week 2</string>
+    <string name="description">Content string: abcxyz</string>
+    <string name="untranslatable" translatable="false">This is a untranslatable text</string>
+</resources>
