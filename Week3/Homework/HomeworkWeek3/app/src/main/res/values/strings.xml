@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">LOGIN</string>
+    <string name="username_input">Username</string>
+    <string name="password_input">Password</string>
+    <string name="button">GO</string>
+    <string name="forgot_password"><a href="">Forgot your password?</a></string>
+</resources>
