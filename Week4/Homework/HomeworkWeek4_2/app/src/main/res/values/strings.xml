@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">HomeworkWeek4_2</string>
+    <string name="title_screen_1">Student Information</string>
+    <string name="full_name">Full Name</string>
+    <string name="birthday">Birthday</string>
+    <string name="classroom">Class</string>
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="other_gender">Other</string>
+    <string name="save">Save</string>
+
+    <string name="title_screen_2">Choose Class</string>
+    <string name="class1">20KTPM1</string>
+    <string name="class2">20KTPM2</string>
+    <string name="class3">20KTPM3</string>
+
+    <string name="title_screen_3">Students</string>
+
+</resources>
